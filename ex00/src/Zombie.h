@@ -3,6 +3,9 @@
 
 # include <string>
 
+/****************
+ * ZOMBIE CLASS *
+ * *************/
 class Zombie {
 public:
 	Zombie(std::string);
@@ -11,5 +14,10 @@ public:
 private:
 	std::string name;
 };
+
+/************************************
+ * INSTANCIATION FUNCTIONS WRAPPERS *
+ * *********************************/
+Zombie* newZombie(std::string name);
 
 #endif

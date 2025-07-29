@@ -27,7 +27,8 @@ NAME := brainz
 SRC_DIR := src
 vpath %.cpp $(SRC_DIR)
 SRC :=	main.cpp \
-		Zombie.cpp
+		Zombie.cpp \
+		newZombie.cpp
 
 BUILD_DIR := build
 OBJ := $(addprefix $(BUILD_DIR)/, $(SRC:.cpp=.o))
