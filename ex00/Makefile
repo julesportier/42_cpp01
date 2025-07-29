@@ -28,7 +28,8 @@ SRC_DIR := src
 vpath %.cpp $(SRC_DIR)
 SRC :=	main.cpp \
 		Zombie.cpp \
-		newZombie.cpp
+		newZombie.cpp \
+		randomChump.cpp
 
 BUILD_DIR := build
 OBJ := $(addprefix $(BUILD_DIR)/, $(SRC:.cpp=.o))
