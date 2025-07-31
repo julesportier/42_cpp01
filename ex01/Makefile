@@ -22,7 +22,7 @@ DEP_FLAGS := 	-MMD
 #########
 # FILES #
 #########
-NAME := zombieHorde
+NAME := zombie_horde
 
 SRC_DIR := src
 vpath %.cpp $(SRC_DIR)

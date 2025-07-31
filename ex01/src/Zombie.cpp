@@ -1,5 +1,6 @@
 #include "Zombie.h"
 #include <iostream>
+#include <string>
 
 Zombie::Zombie() {};
 
