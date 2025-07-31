@@ -8,9 +8,10 @@
  * *************/
 class Zombie {
 public:
-	Zombie(std::string);
+	Zombie();
 	~Zombie();
 	void announce() const;
+	void set_name(std::string name);
 private:
 	std::string name;
 };

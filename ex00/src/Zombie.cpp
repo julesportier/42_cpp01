@@ -1,7 +1,8 @@
 #include "Zombie.h"
 #include <iostream>
+#include <string>
 
-Zombie::Zombie(std::string n) : name(n) {};
+Zombie::Zombie() {};
 
 Zombie::~Zombie()
 {
@@ -11,4 +12,9 @@ Zombie::~Zombie()
 void Zombie::announce() const
 {
 	std::cout << this->name << ": BraiiiiiiinnnzzzZ...\n";
+}
+
+void Zombie::set_name(std::string name)
+{
+	this->name = name;
 }
