@@ -9,7 +9,7 @@ class HumanB
 public:
 	HumanB(std::string name);
 	void attack() const;
-	void setWeapon(Weapon w);
+	void setWeapon(Weapon& weapon);
 private:
 	std::string const name;
 	Weapon* w;

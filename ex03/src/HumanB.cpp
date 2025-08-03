@@ -17,8 +17,7 @@ void HumanB::attack() const
 	std::cout << '\n';
 }
 
-void HumanB::setWeapon(Weapon w)
+void HumanB::setWeapon(Weapon& weapon)
 {
-	std::cout << w.getType() << '\n';//<- DEBUG
-	this->w = &w;
+	this->w = &weapon;
 }
