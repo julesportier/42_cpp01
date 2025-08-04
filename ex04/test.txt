@@ -1,0 +1,4 @@
+Voici le texte de test.
+Search this text.
+search this text.
+sear this text.
