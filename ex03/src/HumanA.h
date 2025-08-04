@@ -4,8 +4,7 @@
 # include "Weapon.h"
 # include <string>
 
-class HumanA
-{
+class HumanA {
 public:
 	HumanA(std::string name, Weapon& w);
 	void attack() const;
