@@ -15,7 +15,6 @@ FileBuf::FileBuf(char const* ifname) : ifname(ifname)
 		throw (-1);
 	}
 	fill_buffer();
-	// std::cout << buffer;
 	ifs.close();
 };
 
@@ -30,8 +29,18 @@ void FileBuf::replace(std::string search, std::string replace)
 		this->buffer.erase(pos, search_size);
 		this->buffer.insert(pos, replace);
 	}
-	std::cout << this->buffer;
 };
+
+void FileBuf::write_disk()
+{ 
+	std::ofstream ofs(this->get_replace_filename().c_str());
+	if (check_ofs_state(ofs)) {
+		ofs.close();
+		throw (-1);
+	}
+	ofs << this->buffer.c_str();
+	ofs.close();
+}
 
 /*******************
  * PRIVATE METHODS *
@@ -46,9 +55,25 @@ int FileBuf::check_ifs_state(std::ifstream& ifs)
 	}
 }
 
+int FileBuf::check_ofs_state(std::ofstream& ofs)
+{
+	if (ofs.good())
+		return (0);
+	else {
+		std::cerr << "Error trying to open the output file\n";
+		return (-1);
+	}
+}
+
 void FileBuf::fill_buffer()
 {
 	std::stringstream s_str;
 	s_str << ifs.rdbuf();
 	buffer = s_str.str();
+}
+
+std::string FileBuf::get_replace_filename()
+{
+	std::string name = this->ifname;
+	return (name.append(".replace"));
 }

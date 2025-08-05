@@ -2,3 +2,4 @@ Voici le texte de test.
 Search this text.
 search this text.
 sear this text.
+search again a search
