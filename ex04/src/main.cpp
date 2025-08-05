@@ -19,8 +19,9 @@ int main(int argc, char *argv[])
 		fb.replace(argv[2], argv[3]);
 		fb.write_disk();
 	}
-	catch (int e) {
-		return (e);
+	catch (std::exception& e) {
+		std::cerr << e.what() << '\n';
+		return (-1);
 	}
 	return (0);
 }

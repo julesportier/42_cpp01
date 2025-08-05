@@ -10,8 +10,6 @@ private:
 	std::string const ifname;
 	std::ifstream ifs;
 	std::string buffer;
-	int check_ifs_state(std::ifstream& ifs);
 	void fill_buffer();
 	std::string get_replace_filename();
-	int check_ofs_state(std::ofstream& ofs);
 };
