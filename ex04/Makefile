@@ -1,67 +1,51 @@
 ###########
 # ALIASES #
 ###########
-CXX = c++
+MAKE := make
+CXX := c++
 
 #########
 # FLAGS #
 #########
-STD_FLAGS :=	-std=c++98
-WARNINGS :=		-Wall -Werror -Wextra
-CXXFLAGS :=		$(STD_FLAGS) $(WARNINGS)
-CXXFLAGS_DB :=	$(STD_FLAGS) $(WARNINGS) -g3
-CXXFLAGS_AS :=	$(STD_FLAGS) $(WARNINGS) -g3 \
-				-fsanitize=address
-CFLAGS_MUS :=	$(STD_FLAGS) $(WARNINGS) -g3 \
-				-fsanitize=memory \
-				-fsanitize=undefined
-CXXFLAGS_NE :=	$(STD_FLAGS) -Wall -Wextra -g3
-CXXFLAGS_REL :=	$(STD_FLAGS) $(WARNINGS) -O2
-DEP_FLAGS := 	-MMD
+STDFLAGS := -std=c++98
+WARNINGS := -Wall -Werror -Wextra
+CXXFLAGS := $(STD_FLAGS) $(WARNINGS)
+DEPFLAGS := -MMD
 
 #########
 # FILES #
 #########
-NAME := sed++
-
 SRC_DIR := src
-vpath %.cpp $(SRC_DIR)
-SRC :=	main.cpp \
-		FileBuf.cpp
-
+TEST_DIR := test
+vpath %.cpp $(SRC_DIR):$(TEST_DIR)
 BUILD_DIR := build
-OBJ := $(addprefix $(BUILD_DIR)/, $(SRC:.cpp=.o))
 
-DEP_FILES := $(OBJ:.o=.d)
+NAME := sed++
+SRC := FileBuf.cpp \
+	   main.cpp
+OBJ := $(SRC:%.cpp=$(BUILD_DIR)/%.o)
+
+NAME_TEST := test-$(NAME)
+SRC_TEST := test.cpp $(filter-out main.cpp,$(SRC))
+OBJ_TEST := $(SRC_TEST:%.cpp=$(BUILD_DIR)/%.o)
+
+DEP_FILES := $(OBJ:.o=.d) $(OBJ_TEST:.o=.d)
 
 ###########
 # TARGETS #
 ###########
+.PHONY: all test clean fclean re
+
 all: $(BUILD_DIR) $(NAME)
+test: $(BUILD_DIR) $(NAME_TEST)
 
-dbg: CXXFLAGS = $(CXXFLAGS_DB)
-dbg: all
-
-noerr: CXXFLAGS = $(CXXFLAGS_NE)
-noerr: all
-
-asan: CXXFLAGS = $(CXXFLAGS_AS)
-asan: CXX = clang++
-asan: all
-
-musan: CXXFLAGS = $(CXXFLAGS_MUS)
-musan: CXX = clang++
-musan: all
-
-rel: CXXFLAGS = $(CXXFLAGS_REL)
-rel: all
-
+# Only print a message if actually removing files/folders
+rm_wrapper = rm -r $(1) 2>/dev/null && echo $(2) || true
 clean:
-	rm -rf $(BUILD_DIR)
-
-fclean:
-	rm -rf $(BUILD_DIR)
-	rm -f $(NAME)
+	@$(call rm_wrapper,$(BUILD_DIR),"remove $(BUILD_DIR)/")
+fclean: clean
+	@$(call rm_wrapper,$(NAME),"remove $(NAME)")
+	@$(call rm_wrapper,$(NAME_TEST),"remove $(NAME_TEST)")
 
 re: fclean all
 
@@ -73,10 +57,11 @@ re: fclean all
 $(NAME): $(OBJ)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
+$(NAME_TEST): $(OBJ_TEST)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
 $(BUILD_DIR)/%.o: %.cpp Makefile
-	$(CXX) $(CXXFLAGS) $(DEP_FLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
 
 $(BUILD_DIR):
-	mkdir -p $@
-
-.PHONY: all clean fclean re noerr dbg asan musan rel
+	mkdir $@
