@@ -1,5 +1,8 @@
-#include <string>
-#include <fstream>
+#ifndef FILEBUF_H
+# define FILEBUF_H
+
+# include <string>
+# include <fstream>
 
 class FileBuf {
 public:
@@ -16,3 +19,5 @@ private:
 	void fill_buffer();
 	std::string get_replace_filename();
 };
+
+#endif
