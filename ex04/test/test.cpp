@@ -161,6 +161,8 @@ int main(void)
 		return (-1);
 	if (test_FileBuf_replace("test/empty.txt", "", ""))
 		return (-1);
+	if (test_FileBuf_replace("test/0.txt", "0", "00"))
+		return (-1);
 	if (test_FileBuf_write_disk("test/test.txt"))
 		return (-1);
 	if (test_FileBuf_write_disk("test/test_line.txt"))

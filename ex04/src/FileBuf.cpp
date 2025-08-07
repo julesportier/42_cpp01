@@ -24,10 +24,12 @@ void FileBuf::replace(std::string search, std::string replace)
 	if (search_size == 0) {
 		return ;
 	}
+	std::string::size_type replace_size = replace.size();
 	std::string::size_type pos = 0;
-	while ((pos = this->buffer.find(search)) != std::string::npos) {
+	while ((pos = this->buffer.find(search, pos)) != std::string::npos) {
 		this->buffer.erase(pos, search_size);
 		this->buffer.insert(pos, replace);
+		pos += replace_size;
 	}
 };
 
