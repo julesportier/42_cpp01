@@ -26,7 +26,7 @@ SRC := FileBuf.cpp \
 OBJ := $(SRC:%.cpp=$(BUILD_DIR)/%.o)
 
 NAME_TEST := test-$(NAME)
-SRC_TEST := test.cpp $(filter-out main.cpp,$(SRC))
+SRC_TEST := test.cpp test_print.cpp $(filter-out main.cpp,$(SRC))
 OBJ_TEST := $(SRC_TEST:%.cpp=$(BUILD_DIR)/%.o)
 
 DEP_FILES := $(OBJ:.o=.d) $(OBJ_TEST:.o=.d)
