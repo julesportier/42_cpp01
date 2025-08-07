@@ -1,9 +1,9 @@
 #include "Harl.h"
 #include <iostream>
 
-/******************
- * PUBLIC METHODS *
- * ***************/
+/********************
+ * HELPER FUNCTIONS *
+ * *****************/
 static harl_fn at(std::string level, harl_map const* map)
 {
 	for (int i = 0; i < 4; ++i) {
@@ -14,6 +14,9 @@ static harl_fn at(std::string level, harl_map const* map)
 	return (NULL);
 }
 
+/******************
+ * PUBLIC METHODS *
+ * ***************/
 void Harl::complain(std::string level) const
 {
 	struct harl_map const map[4] = {
