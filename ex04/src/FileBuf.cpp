@@ -49,13 +49,13 @@ std::string FileBuf::get_ifname() const
 	return (this->ifname);
 }
 
-int FileBuf::find_str_nbr(std::string str) const
+int FileBuf::count_str(std::string str) const
 {
-	std::string::size_type pos = 0;
 	std::string::size_type len = str.size();
 	if (len == 0)
 		return (0);
 	int nbr = 0;
+	std::string::size_type pos = 0;
 	while ((pos = this->buffer.find(str, pos)) != std::string::npos) {
 		++nbr;
 		pos += len;

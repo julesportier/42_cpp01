@@ -10,7 +10,7 @@ public:
 	void replace(std::string search, std::string replace);
 	void write_disk();
 	std::string get_ifname() const;
-	int find_str_nbr(std::string str) const;
+	int count_str(std::string str) const;
 	std::string get_buffer() const;
 private:
 	std::string const ifname;

@@ -34,16 +34,16 @@ static int test_FileBuf_replace(
 {
 	try {
 		FileBuf fb(input_file.c_str());
-		int search_nbr = fb.find_str_nbr(search);
+		int search_nbr = fb.count_str(search);
 		fb.replace(search, replace);
 		if (replace.size() == 0) {
-			if (fb.find_str_nbr(search) == 0)
+			if (fb.count_str(search) == 0)
 				print_ok_replace(fb, search, replace);
 			else
 				return (print_ko_replace(fb, search, replace));
 		}
 		else {
-			if (search_nbr == fb.find_str_nbr(replace))
+			if (search_nbr == fb.count_str(replace))
 				print_ok_replace(fb, search, replace);
 			else
 				return (print_ko_replace(fb, search, replace));
