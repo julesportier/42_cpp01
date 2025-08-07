@@ -1,9 +1,9 @@
 #include "Harl.h"
 #include <iostream>
 
-/******************
- * PUBLIC METHODS *
- * ***************/
+/********************
+ * HELPER FUNCTIONS *
+ * *****************/
 static harl_fn at(std::string level, harl_map const* map)
 {
 	for (int i = 0; i < 4; ++i) {
@@ -12,19 +12,6 @@ static harl_fn at(std::string level, harl_map const* map)
 	}
 	std::cerr << "level \"" << level << "\" not found\n";
 	return (NULL);
-}
-
-void Harl::complain(std::string level) const
-{
-	struct harl_map const map[4] = {
-		{"DEBUG", &Harl::debug},
-		{"INFO", &Harl::info},
-		{"WARNING", &Harl::warning},
-		{"ERROR", &Harl::error}
-	};
-	harl_fn level_fn = at(level, map);
-	if (level_fn)
-		(this->*level_fn)();
 }
 
 static int find(std::string str, std::string const* lookup, int size)
@@ -40,6 +27,22 @@ static int find(std::string str, std::string const* lookup, int size)
 static void print_level(std::string level)
 {
 	std::cout << "[ " << level << " ]\n";
+}
+
+/******************
+ * PUBLIC METHODS *
+ * ***************/
+void Harl::complain(std::string level) const
+{
+	struct harl_map const map[4] = {
+		{"DEBUG", &Harl::debug},
+		{"INFO", &Harl::info},
+		{"WARNING", &Harl::warning},
+		{"ERROR", &Harl::error}
+	};
+	harl_fn level_fn = at(level, map);
+	if (level_fn)
+		(this->*level_fn)();
 }
 
 void Harl::filter(std::string level) const
