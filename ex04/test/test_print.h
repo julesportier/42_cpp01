@@ -1,4 +1,7 @@
-#include "../src/FileBuf.h"
+#ifndef TEST_PRINT_H
+# define TEST_PRINT_H
+
+# include "../src/FileBuf.h"
 
 void print_ok(std::string message);
 void print_ok_exception(std::string message, std::exception& e);
@@ -13,3 +16,5 @@ int print_ko_replace(
 	std::string search,
 	std::string replace);
 int print_write(std::string input, std::string output);
+
+#endif
