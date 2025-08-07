@@ -34,9 +34,10 @@ DEP_FILES := $(OBJ:.o=.d) $(OBJ_TEST:.o=.d)
 ###########
 # TARGETS #
 ###########
-.PHONY: all test clean fclean re
+.PHONY: all exec test clean fclean re
 
-all: $(BUILD_DIR) $(NAME)
+all: exec test
+exec: $(BUILD_DIR) $(NAME)
 test: $(BUILD_DIR) $(NAME_TEST)
 
 # Only print a message if actually removing files/folders
